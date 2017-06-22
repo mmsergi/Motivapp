@@ -38,13 +38,13 @@ public class MainActivity extends AppCompatActivity {
         public Fragment getItem(int position) {
             switch(position) {
                 case 0:
-                    //return ImagesFragment.newInstance();
+                    return ImagesFragment.newInstance();
                 case 1:
-                    //return QuotesFragment.newInstance();
+                    return QuotesFragment.newInstance();
                 case 2:
-                    //return VideosFragment.newInstance();
+                    return ImagesFragment.newInstance();
                 case 3:
-                    //return NotificationsFragment.newInstance();
+                    return QuotesFragment.newInstance();
                 default:
                     return ImagesFragment.newInstance();
             }
