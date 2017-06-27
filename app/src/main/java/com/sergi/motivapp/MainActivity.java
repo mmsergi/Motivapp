@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -22,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         viewPager.setAdapter(new FragmentAdapter(getSupportFragmentManager()));
+        viewPager.setOffscreenPageLimit(3);
 
         TabLayout tabs = (TabLayout) findViewById(R.id.tab_layout);
         tabs.setTabMode(TabLayout.MODE_SCROLLABLE);
