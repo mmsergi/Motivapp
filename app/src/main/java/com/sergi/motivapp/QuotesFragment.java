@@ -23,4 +23,6 @@ public class QuotesFragment extends Fragment {
         QuotesFragment f = new QuotesFragment();
         return f;
     }
+
+
 }

@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
                 case 2:
                     return ImagesFragment.newInstance();
                 case 3:
-                    return QuotesFragment.newInstance();
+                    return NotificationsFragment.newInstance();
                 default:
                     return ImagesFragment.newInstance();
             }
