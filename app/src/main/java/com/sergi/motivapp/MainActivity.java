@@ -1,5 +1,6 @@
 package com.sergi.motivapp;
 
+import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -7,7 +8,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.View;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -69,5 +70,14 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
+    }
+
+    public void onClick(View v){
+        switch (v.getId()){
+            case R.id.goalsBtn:
+                Intent i = new Intent(this, NewGoalActivity.class);
+                startActivity(i);
+                break;
+        }
     }
 }
