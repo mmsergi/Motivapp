@@ -17,12 +17,12 @@ import java.util.ArrayList;
  * Created by gersoft on 29/06/2017.
  */
 
-public class GoalListViewAdapter extends ArrayAdapter<String> {
+public class TasksGoalListViewAdapter extends ArrayAdapter<String> {
 
     private final Context context;
     private final ArrayList<String> values;
 
-    public GoalListViewAdapter(Context context, ArrayList<String> aList) {
+    public TasksGoalListViewAdapter(Context context, ArrayList<String> aList) {
         super(context, R.layout.item_task);
 
         this.values = aList;

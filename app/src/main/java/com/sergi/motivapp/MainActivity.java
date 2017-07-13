@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
                 case 1:
                     return QuotesFragment.newInstance();
                 case 2:
-                    return ImagesFragment.newInstance();
+                    return QuotesFragment.newInstance();
                 case 3:
                     return NotificationsFragment.newInstance();
                 default:
@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
     public void onClick(View v){
         switch (v.getId()){
             case R.id.goalsBtn:
-                Intent i = new Intent(this, NewGoalActivity.class);
+                Intent i = new Intent(this, GoalsActivity.class);
                 startActivity(i);
                 break;
         }
