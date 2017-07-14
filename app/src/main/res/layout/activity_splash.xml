@@ -2,16 +2,34 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/colorPrimary"
     android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <com.hanks.htextview.typer.TyperTextView
+        android:id="@+id/fallTextView"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
+        android:gravity="center_horizontal"
         android:text="MOTIVAPP"
         android:textColor="@android:color/background_light"
         android:textSize="36sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        app:charIncrease="3"
+        app:typerSpeed="80"
+        android:layout_marginTop="116dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/tipText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:padding="40dp"
+        android:text="Tip of the day: Write down your objectives with a pen, and face it every morning"
+        android:textColor="@android:color/background_light"
+        android:textSize="22sp" />
+
 </RelativeLayout>

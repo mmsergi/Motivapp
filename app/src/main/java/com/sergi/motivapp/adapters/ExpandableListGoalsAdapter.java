@@ -6,9 +6,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 
+import com.sergi.motivapp.DatabaseGoals;
+import com.sergi.motivapp.GoalsActivity;
 import com.sergi.motivapp.R;
+import com.sergi.motivapp.items.Goal;
 
 import java.util.HashMap;
 import java.util.List;
@@ -66,21 +70,38 @@ public class ExpandableListGoalsAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getGroupView(int i, boolean b, View view, ViewGroup viewGroup) {
-        String headerTitle = (String)getGroup(i);
+
+        final String headerTitle = (String) getGroup(i);
+
         if(view == null)
         {
             LayoutInflater inflater = (LayoutInflater)this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = inflater.inflate(R.layout.list_group,null);
+            view = inflater.inflate(R.layout.list_group, null);
         }
+
         TextView lblListHeader = (TextView)view.findViewById(R.id.lblListHeader);
         lblListHeader.setTypeface(null, Typeface.BOLD);
         lblListHeader.setText(headerTitle);
+
+        Button deleteBtn = (Button) view.findViewById(R.id.deleteBtn);
+        deleteBtn.setFocusable(false);
+        deleteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                DatabaseGoals db = new DatabaseGoals(context);
+                db.deleteGoal(headerTitle);
+
+                ((GoalsActivity) context).initData();
+
+            }
+        });
         return view;
     }
 
     @Override
     public View getChildView(int i, int i1, boolean b, View view, ViewGroup viewGroup) {
-        final String childText = (String)getChild(i,i1);
+        final String childText = (String) getChild(i,i1);
         if(view == null)
         {
             LayoutInflater inflater = (LayoutInflater)this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);

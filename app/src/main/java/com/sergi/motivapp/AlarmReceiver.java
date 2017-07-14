@@ -32,7 +32,7 @@ public class AlarmReceiver extends BroadcastReceiver {
                         .setContentTitle("Motivation pill")
                         .setContentText("Hustle hard! " + time);
 
-        Intent resultIntent = new Intent(context, MainActivity.class);
+        Intent resultIntent = new Intent(context, SplashActivity.class);
 
         // The stack builder object will contain an artificial back stack for the
         // started Activity.

@@ -1,5 +1,7 @@
 package com.sergi.motivapp;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -79,5 +81,31 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(i);
                 break;
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        AlertDialog.Builder builderSingle = new AlertDialog.Builder(MainActivity.this);
+        builderSingle.setTitle("We do, we decide");
+        builderSingle.setMessage("Are you ready to take action?");
+        builderSingle.setNegativeButton("Not yet",
+                new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                }).setPositiveButton("YEAH",
+                new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        finish();
+                    }
+
+                });
+
+        builderSingle.show();
     }
 }

@@ -49,6 +49,17 @@ public class DatabaseGoals extends SQLiteOpenHelper {
         }
     }
 
+    public void deleteGoal(String goal){
+        SQLiteDatabase db = getWritableDatabase();
+
+        if (db!=null) {
+
+            db.delete("goals", "goal='" + goal + "'", null);
+            db.close();
+
+        }
+    }
+
     public ArrayList<Goal> getGoals(){
 
         ArrayList<Goal> aListGoals = new ArrayList<>();
