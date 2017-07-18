@@ -50,26 +50,9 @@ public class GoalsActivity extends AppCompatActivity {
         listDataHeader = new ArrayList<>();
         listHash = new HashMap<>();
 
-        for (int i = 0; i < aListGoals.size(); i++) {
 
-            Goal item = aListGoals.get(i);
 
-            listDataHeader.add(item.goal);
-
-            try {
-                JSONArray jsonArray = new JSONArray(item.tasks);
-                List<String> tasksList = new ArrayList<>();
-
-                for (int e = 0; e < jsonArray.length(); e++) {
-                    tasksList.add(jsonArray.get(e).toString());
-                    listHash.put(listDataHeader.get(i), tasksList);
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-
-        listAdapter = new ExpandableListGoalsAdapter(this,listDataHeader, listHash);
+        listAdapter = new ExpandableListGoalsAdapter(this, aListGoals);
         listView.setAdapter(listAdapter);
     }
 

@@ -2,6 +2,7 @@ package com.sergi.motivapp.adapters;
 
 import android.content.Context;
 import android.graphics.Typeface;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,43 +15,47 @@ import com.sergi.motivapp.GoalsActivity;
 import com.sergi.motivapp.R;
 import com.sergi.motivapp.items.Goal;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-
 public class ExpandableListGoalsAdapter extends BaseExpandableListAdapter {
     private Context context;
-    private List<String> listDataHeader;
-    private HashMap<String,List<String>> listHashMap;
 
-    public ExpandableListGoalsAdapter(Context context, List<String> listDataHeader, HashMap<String, List<String>> listHashMap) {
+    private ArrayList<Goal> goalsList;
+
+    public ExpandableListGoalsAdapter(Context context, ArrayList<Goal> goalsList) {
         this.context = context;
-        this.listDataHeader = listDataHeader;
-        this.listHashMap = listHashMap;
+        this.goalsList = goalsList;
     }
 
     @Override
     public int getGroupCount() {
-        return listDataHeader.size();
+        return goalsList.size();
     }
 
     @Override
     public int getChildrenCount(int i) {
-         if (listHashMap.get(listDataHeader.get(i)) != null) {
-             return listHashMap.get(listDataHeader.get(i)).size();
-         } else {
-             return 0;
-         }
+        try {
+            JSONArray jsonArray = new JSONArray(goalsList.get(i).tasks);
+            return jsonArray.length();
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return 0;
+        }
     }
 
     @Override
     public Object getGroup(int i) {
-        return listDataHeader.get(i);
+        return goalsList.get(i);
     }
 
     @Override
     public Object getChild(int i, int i1) {
-        return listHashMap.get(listDataHeader.get(i)).get(i1); // i = Group Item , i1 = ChildItem
+        return goalsList.size();
     }
 
     @Override
@@ -69,9 +74,7 @@ public class ExpandableListGoalsAdapter extends BaseExpandableListAdapter {
     }
 
     @Override
-    public View getGroupView(int i, boolean b, View view, ViewGroup viewGroup) {
-
-        final String headerTitle = (String) getGroup(i);
+    public View getGroupView(final int i, boolean b, View view, ViewGroup viewGroup) {
 
         if(view == null)
         {
@@ -79,9 +82,13 @@ public class ExpandableListGoalsAdapter extends BaseExpandableListAdapter {
             view = inflater.inflate(R.layout.list_group, null);
         }
 
-        TextView lblListHeader = (TextView)view.findViewById(R.id.lblListHeader);
-        lblListHeader.setTypeface(null, Typeface.BOLD);
-        lblListHeader.setText(headerTitle);
+        TextView goalTextView = (TextView)view.findViewById(R.id.goalTextView);
+        goalTextView.setTypeface(null, Typeface.BOLD);
+        goalTextView.setText(goalsList.get(i).goal);
+
+        TextView whyTextView = (TextView)view.findViewById(R.id.whyTextView);
+        whyTextView.setTypeface(null, Typeface.BOLD);
+        whyTextView.setText(goalsList.get(i).why);
 
         Button deleteBtn = (Button) view.findViewById(R.id.deleteBtn);
         deleteBtn.setFocusable(false);
@@ -90,18 +97,19 @@ public class ExpandableListGoalsAdapter extends BaseExpandableListAdapter {
             public void onClick(View v) {
 
                 DatabaseGoals db = new DatabaseGoals(context);
-                db.deleteGoal(headerTitle);
+                db.deleteGoal(goalsList.get(i).goal);
 
                 ((GoalsActivity) context).initData();
 
             }
         });
+
         return view;
     }
 
     @Override
     public View getChildView(int i, int i1, boolean b, View view, ViewGroup viewGroup) {
-        final String childText = (String) getChild(i,i1);
+
         if(view == null)
         {
             LayoutInflater inflater = (LayoutInflater)this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -109,7 +117,16 @@ public class ExpandableListGoalsAdapter extends BaseExpandableListAdapter {
         }
 
         TextView txtListChild = (TextView)view.findViewById(R.id.lblListItem);
-        txtListChild.setText(childText);
+
+        try {
+            JSONArray jsonArray = new JSONArray(goalsList.get(i).tasks);
+
+            txtListChild.setText(jsonArray.get(i1).toString());
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
         return view;
     }
 
