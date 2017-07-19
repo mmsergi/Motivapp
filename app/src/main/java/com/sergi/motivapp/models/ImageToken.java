@@ -1,4 +1,4 @@
-package com.sergi.motivapp.items;
+package com.sergi.motivapp.models;
 
 /**
  * Created by Sergi on 22/06/2017.

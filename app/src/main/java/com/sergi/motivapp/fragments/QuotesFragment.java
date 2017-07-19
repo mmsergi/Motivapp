@@ -1,10 +1,12 @@
-package com.sergi.motivapp;
+package com.sergi.motivapp.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.sergi.motivapp.R;
 
 /**
  * Created by gersoft on 22/06/2017.

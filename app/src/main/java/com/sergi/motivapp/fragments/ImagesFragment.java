@@ -1,4 +1,4 @@
-package com.sergi.motivapp;
+package com.sergi.motivapp.fragments;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -10,8 +10,9 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Toast;
 
+import com.sergi.motivapp.R;
 import com.sergi.motivapp.adapters.ImagesListAdapter;
-import com.sergi.motivapp.items.ImageToken;
+import com.sergi.motivapp.models.ImageToken;
 
 import org.json.JSONArray;
 import org.json.JSONException;

@@ -1,4 +1,4 @@
-package com.sergi.motivapp;
+package com.sergi.motivapp.activities;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,8 +10,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import com.sergi.motivapp.DatabaseGoals;
+import com.sergi.motivapp.R;
 import com.sergi.motivapp.adapters.TasksGoalListViewAdapter;
-import com.sergi.motivapp.items.Goal;
+import com.sergi.motivapp.models.Goal;
 
 import org.json.JSONArray;
 

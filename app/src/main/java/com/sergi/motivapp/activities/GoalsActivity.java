@@ -1,4 +1,4 @@
-package com.sergi.motivapp;
+package com.sergi.motivapp.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,11 +6,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ExpandableListView;
 
+import com.sergi.motivapp.DatabaseGoals;
+import com.sergi.motivapp.R;
 import com.sergi.motivapp.adapters.ExpandableListGoalsAdapter;
-import com.sergi.motivapp.items.Goal;
-
-import org.json.JSONArray;
-import org.json.JSONException;
+import com.sergi.motivapp.models.Goal;
 
 import java.util.ArrayList;
 import java.util.HashMap;

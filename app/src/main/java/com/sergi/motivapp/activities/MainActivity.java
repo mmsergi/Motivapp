@@ -1,4 +1,4 @@
-package com.sergi.motivapp;
+package com.sergi.motivapp.activities;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -11,6 +11,11 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+
+import com.sergi.motivapp.fragments.ImagesFragment;
+import com.sergi.motivapp.fragments.NotificationsFragment;
+import com.sergi.motivapp.fragments.QuotesFragment;
+import com.sergi.motivapp.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

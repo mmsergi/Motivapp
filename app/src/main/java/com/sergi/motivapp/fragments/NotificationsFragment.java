@@ -1,4 +1,4 @@
-package com.sergi.motivapp;
+package com.sergi.motivapp.fragments;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -13,6 +13,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
+
+import com.sergi.motivapp.AlarmReceiver;
+import com.sergi.motivapp.R;
 
 import java.util.Calendar;
 

@@ -1,4 +1,4 @@
-package com.sergi.motivapp.items;
+package com.sergi.motivapp.models;
 
 /**
  * Created by gersoft on 13/07/2017.

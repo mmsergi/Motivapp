@@ -9,6 +9,9 @@ import android.support.v4.app.TaskStackBuilder;
 import android.support.v7.app.NotificationCompat;
 import android.widget.Toast;
 
+import com.sergi.motivapp.activities.MainActivity;
+import com.sergi.motivapp.activities.SplashActivity;
+
 import java.util.Calendar;
 
 public class AlarmReceiver extends BroadcastReceiver {

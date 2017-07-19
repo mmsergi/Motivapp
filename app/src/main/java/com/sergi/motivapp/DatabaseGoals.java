@@ -5,9 +5,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
-import com.sergi.motivapp.items.Goal;
+import com.sergi.motivapp.models.Goal;
 
 import java.util.ArrayList;
 

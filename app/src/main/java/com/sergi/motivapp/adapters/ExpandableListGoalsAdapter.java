@@ -2,7 +2,6 @@ package com.sergi.motivapp.adapters;
 
 import android.content.Context;
 import android.graphics.Typeface;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,16 +10,14 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.sergi.motivapp.DatabaseGoals;
-import com.sergi.motivapp.GoalsActivity;
+import com.sergi.motivapp.activities.GoalsActivity;
 import com.sergi.motivapp.R;
-import com.sergi.motivapp.items.Goal;
+import com.sergi.motivapp.models.Goal;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
 public class ExpandableListGoalsAdapter extends BaseExpandableListAdapter {
     private Context context;
