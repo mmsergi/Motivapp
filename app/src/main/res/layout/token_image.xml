@@ -31,9 +31,18 @@
 
     <TextView
         android:id="@+id/textViewPoints"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/imageView"
         android:text="TextView"
-        android:textSize="18sp"
-        android:layout_below="@+id/imageView" />
+        android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/shareBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="share"
+        android:layout_below="@+id/imageView"
+        android:layout_alignParentEnd="true" />
+
 </RelativeLayout>

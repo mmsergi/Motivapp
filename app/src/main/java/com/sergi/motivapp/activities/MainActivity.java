@@ -1,5 +1,6 @@
 package com.sergi.motivapp.activities;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -17,6 +18,9 @@ import com.sergi.motivapp.fragments.NotificationsFragment;
 import com.sergi.motivapp.fragments.QuotesFragment;
 import com.sergi.motivapp.R;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -24,11 +28,19 @@ public class MainActivity extends AppCompatActivity {
 
     @BindView(R.id.pager) ViewPager viewPager;
 
+    final private int REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS = 101;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+
+        final List<String> permissionsList = new ArrayList<>();
+        permissionsList.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+
+        requestPermissions(permissionsList.toArray(new String[permissionsList.size()]), REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS);
 
         viewPager.setAdapter(new FragmentAdapter(getSupportFragmentManager()));
         viewPager.setOffscreenPageLimit(3);

@@ -1,12 +1,18 @@
 package com.sergi.motivapp.adapters;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -28,10 +34,13 @@ import java.util.ArrayList;
 public class ImagesListAdapter extends BaseAdapter {
     private ArrayList listData;
     private LayoutInflater layoutInflater;
+    private Context context;
 
     public ImagesListAdapter(Context context, ArrayList listData) {
         this.listData = listData;
         layoutInflater = LayoutInflater.from(context);
+
+        this.context = context;
     }
 
     @Override
@@ -52,9 +61,11 @@ public class ImagesListAdapter extends BaseAdapter {
     public View getView(int position, View v, ViewGroup parent) {
 
         v = layoutInflater.inflate(R.layout.token_image, null);
+
         TextView title = (TextView) v.findViewById(R.id.textViewTitle);
         TextView points = (TextView) v.findViewById(R.id.textViewPoints);
         final ImageView image = (ImageView) v.findViewById(R.id.imageView);
+        Button shareBtn = (Button) v.findViewById(R.id.shareBtn);
 
         final ProgressBar progressBar = (ProgressBar) v.findViewById(R.id.progress);
 
@@ -77,6 +88,22 @@ public class ImagesListAdapter extends BaseAdapter {
                 }
             }).into(image);
         }
+
+        shareBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bitmap bitmapImg = ((BitmapDrawable) image.getDrawable()).getBitmap();
+
+                Intent intent = new Intent(Intent.ACTION_SEND);
+                intent.putExtra(Intent.EXTRA_TEXT, "More images at: https://goo.gl/GPUoTJ");
+                String path = MediaStore.Images.Media.insertImage(context.getContentResolver(), bitmapImg, "", null);
+                Uri screenshotUri = Uri.parse(path);
+
+                intent.putExtra(Intent.EXTRA_STREAM, screenshotUri);
+                intent.setType("image/*");
+                context.startActivity(Intent.createChooser(intent, "Share:"));
+            }
+        });
 
         return v;
     }

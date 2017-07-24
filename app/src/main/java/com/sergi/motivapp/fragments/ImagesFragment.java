@@ -61,8 +61,7 @@ public class ImagesFragment extends ListFragment implements AdapterView.OnItemCl
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
         Toast.makeText(getActivity(), "Item: " + position, Toast.LENGTH_SHORT).show();
     }
-
-
+    
     private class downloadImagesData extends AsyncTask<String, String, String> {
 
         protected void onPreExecute() {
