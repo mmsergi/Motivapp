@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -32,17 +33,41 @@
     <TextView
         android:id="@+id/textViewPoints"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
+        android:layout_alignBottom="@+id/shareBtn"
         android:layout_below="@+id/imageView"
+        android:layout_marginTop="10dp"
         android:text="TextView"
         android:textSize="18sp" />
+
+    <ImageButton
+        android:id="@+id/upBtn"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignTop="@id/textViewPoints"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@+id/textViewPoints"
+        android:adjustViewBounds="true"
+        android:background="@null"
+        android:scaleType="fitXY"
+        android:tint="@color/colorPrimaryDark"
+        app:srcCompat="@drawable/upvote" />
 
     <Button
         android:id="@+id/shareBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="share"
+        android:layout_alignParentEnd="true"
         android:layout_below="@+id/imageView"
-        android:layout_alignParentEnd="true" />
+        android:layout_marginTop="10dp"
+        android:background="@null"
+        android:gravity="right"
+        android:minHeight="0dp"
+        android:text="share"
+        android:textColor="@color/colorShare"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+
 
 </RelativeLayout>

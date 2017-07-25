@@ -60,7 +60,7 @@ public class ImagesListAdapter extends BaseAdapter {
 
     public View getView(int position, View v, ViewGroup parent) {
 
-        v = layoutInflater.inflate(R.layout.token_image, null);
+        v = layoutInflater.inflate(R.layout.token_image_constraint, null);
 
         TextView title = (TextView) v.findViewById(R.id.textViewTitle);
         TextView points = (TextView) v.findViewById(R.id.textViewPoints);

@@ -3,14 +3,13 @@
     <color name="colorPrimary">#000000</color>
     <color name="colorPrimaryDark">#f57f17</color>
     <color name="colorAccent">#ffab40</color>
-
-
+    <color name="colorShare">#26ce00</color>
 
     <!-- WELCOME ACTIVITY -->
 
     <!-- Screens background color-->
     <color name="bg_screen1">#f64c73</color>
-    <color name="bg_screen2">#20d2bb</color>
+    <color name="bg_screen2">#24c500</color>
     <color name="bg_screen3">#3395ff</color>
     <color name="bg_screen4">#c873f4</color>
 
