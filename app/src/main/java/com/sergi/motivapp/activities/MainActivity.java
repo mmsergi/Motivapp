@@ -17,6 +17,7 @@ import com.sergi.motivapp.fragments.ImagesFragment;
 import com.sergi.motivapp.fragments.NotificationsFragment;
 import com.sergi.motivapp.fragments.QuotesFragment;
 import com.sergi.motivapp.R;
+import com.sergi.motivapp.fragments.VideosFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
                 case 1:
                     return QuotesFragment.newInstance();
                 case 2:
-                    return QuotesFragment.newInstance();
+                    return VideosFragment.newInstance();
                 case 3:
                     return NotificationsFragment.newInstance();
                 default:

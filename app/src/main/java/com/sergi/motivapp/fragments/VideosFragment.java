@@ -7,12 +7,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.Toast;
-
 import com.sergi.motivapp.R;
-import com.sergi.motivapp.adapters.ImagesListAdapter;
-import com.sergi.motivapp.models.ImageToken;
+import com.sergi.motivapp.adapters.VideosListAdapter;
+import com.sergi.motivapp.models.VideoToken;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -27,41 +24,31 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
-/**
- * Created by Sergi on 20/06/2017.
- */
+public class VideosFragment extends ListFragment {
 
-public class ImagesFragment extends ListFragment implements AdapterView.OnItemClickListener {
-
-    JSONArray jsonImages;
-    ArrayList<ImageToken> listData = new ArrayList<>();
+    JSONArray jsonVideos;
+    ArrayList<VideoToken> listData = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.list_view_layout, container, false);
 
-        new downloadImagesData().execute("http://appsergi.esy.es/getimages.php");
-
         return v;
     }
 
-    public static ImagesFragment newInstance() {
-        ImagesFragment f = new ImagesFragment();
+    @Override
+    public void onViewCreated (View view, Bundle savedInstanceState) {
+
+        new downloadVideosData().execute("http://appsergi.esy.es/getvideos.php");
+
+    }
+
+    public static VideosFragment newInstance() {
+        VideosFragment f = new VideosFragment();
         return f;
     }
 
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        getListView().setOnItemClickListener(this);
-    }
-
-    @Override
-    public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-        Toast.makeText(getActivity(), "Item: " + position, Toast.LENGTH_SHORT).show();
-    }
-    
-    private class downloadImagesData extends AsyncTask<String, String, String> {
+    private class downloadVideosData extends AsyncTask<String, String, String> {
 
         protected void onPreExecute() {
             super.onPreExecute();
@@ -88,7 +75,7 @@ public class ImagesFragment extends ListFragment implements AdapterView.OnItemCl
                     buffer.append(line+"\n");
 
                     try {
-                        jsonImages  =  new JSONArray(line);
+                        jsonVideos =  new JSONArray(line);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -98,6 +85,7 @@ public class ImagesFragment extends ListFragment implements AdapterView.OnItemCl
                 }
 
                 return buffer.toString();
+
 
             } catch (MalformedURLException e) {
                 e.printStackTrace();
@@ -122,26 +110,27 @@ public class ImagesFragment extends ListFragment implements AdapterView.OnItemCl
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
 
-            int lengthArray = jsonImages.length();
+            int lengthArray = jsonVideos.length();
 
             for (int i = 0; i < lengthArray; i++) {
                 JSONObject jsonObject;
                 try {
 
-                    jsonObject = jsonImages.getJSONObject(i);
+                    jsonObject = jsonVideos.getJSONObject(i);
 
                     String title = jsonObject.getString("title");
                     String url = jsonObject.getString("url");
                     int points = jsonObject.getInt("points");
 
-                    listData.add(new ImageToken(title, url, points));
+                    listData.add(new VideoToken(title, url, points));
 
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
 
-            getListView().setAdapter(new ImagesListAdapter(getContext(), listData));
+            getListView().setAdapter(new VideosListAdapter(getContext(), listData));
         }
     }
+
 }

@@ -2,11 +2,7 @@ package com.sergi.motivapp.adapters;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
-import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,20 +19,24 @@ import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.sergi.motivapp.R;
+import com.sergi.motivapp.activities.VideoActivity;
 import com.sergi.motivapp.models.ImageToken;
+import com.sergi.motivapp.models.QuoteToken;
+import com.sergi.motivapp.models.VideoToken;
 
 import java.util.ArrayList;
 
 /**
- * Created by Sergi on 22/06/2017.
+ * Created by gersoft on 26/07/2017.
  */
 
-public class ImagesListAdapter extends BaseAdapter {
+public class VideosListAdapter extends BaseAdapter {
+
     private ArrayList listData;
     private LayoutInflater layoutInflater;
     private Context context;
 
-    public ImagesListAdapter(Context context, ArrayList listData) {
+    public VideosListAdapter(Context context, ArrayList listData) {
         this.listData = listData;
         this.layoutInflater = LayoutInflater.from(context);
 
@@ -58,23 +58,22 @@ public class ImagesListAdapter extends BaseAdapter {
         return position;
     }
 
+    @Override
     public View getView(int position, View v, ViewGroup parent) {
 
-        v = layoutInflater.inflate(R.layout.token_image, null);
+        v = layoutInflater.inflate(R.layout.token_video, null);
 
         TextView title = (TextView) v.findViewById(R.id.textViewTitle);
-        TextView points = (TextView) v.findViewById(R.id.textViewPoints);
         final ImageView image = (ImageView) v.findViewById(R.id.imageView);
-        Button shareBtn = (Button) v.findViewById(R.id.shareBtn);
+        Button watchBtn = (Button) v.findViewById(R.id.watchBtn);
 
         final ProgressBar progressBar = (ProgressBar) v.findViewById(R.id.progress);
 
-        ImageToken token = (ImageToken) listData.get(position);
+        final VideoToken token = (VideoToken) listData.get(position);
         title.setText(token.title);
-        points.setText(Integer.toString(token.points) + " points");
 
         if (image != null) {
-            Glide.with(v).load(token.url).listener(new RequestListener<Drawable>() {
+            Glide.with(v).load("https://img.youtube.com/vi/" + token.url + "/hqdefault.jpg").listener(new RequestListener<Drawable>() {
                 @Override
                 public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
                     progressBar.setVisibility(View.GONE);
@@ -89,19 +88,12 @@ public class ImagesListAdapter extends BaseAdapter {
             }).into(image);
         }
 
-        shareBtn.setOnClickListener(new View.OnClickListener() {
+        watchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Bitmap bitmapImg = ((BitmapDrawable) image.getDrawable()).getBitmap();
-
-                Intent intent = new Intent(Intent.ACTION_SEND);
-                intent.putExtra(Intent.EXTRA_TEXT, "More images at: https://goo.gl/GPUoTJ");
-                String path = MediaStore.Images.Media.insertImage(context.getContentResolver(), bitmapImg, "", null);
-                Uri screenshotUri = Uri.parse(path);
-
-                intent.putExtra(Intent.EXTRA_STREAM, screenshotUri);
-                intent.setType("image/*");
-                context.startActivity(Intent.createChooser(intent, "Share:"));
+                Intent i = new Intent(context, VideoActivity.class);
+                i.putExtra(Intent.EXTRA_TEXT, token.url);
+                context.startActivity(i);
             }
         });
 
