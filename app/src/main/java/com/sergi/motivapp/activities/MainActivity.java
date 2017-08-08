@@ -11,6 +11,10 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.sergi.motivapp.fragments.ImagesFragment;
@@ -31,12 +35,14 @@ public class MainActivity extends AppCompatActivity {
 
     final private int REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS = 101;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(myToolbar);
 
         final List<String> permissionsList = new ArrayList<>();
         permissionsList.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
@@ -50,6 +56,43 @@ public class MainActivity extends AppCompatActivity {
         tabs.setTabMode(TabLayout.MODE_SCROLLABLE);
 
         tabs.setupWithViewPager(viewPager);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_settings:
+                // User chose the "Settings" item, show the app settings UI...
+                return true;
+
+            case R.id.action_rate:
+                // User chose the "Favorite" action, mark the current item
+                // as a favorite...
+                return true;
+
+            case R.id.action_share:
+                // User chose the "Favorite" action, mark the current item
+                // as a favorite...
+                return true;
+
+            case R.id.action_feedback:
+                // User chose the "Favorite" action, mark the current item
+                // as a favorite...
+                return true;
+
+            default:
+                // If we got here, the user's action was not recognized.
+                // Invoke the superclass to handle it.
+                return super.onOptionsItemSelected(item);
+
+        }
     }
 
     public class FragmentAdapter extends FragmentPagerAdapter {
@@ -104,8 +147,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         AlertDialog.Builder builderSingle = new AlertDialog.Builder(MainActivity.this);
-        builderSingle.setTitle("We do, we decide");
-        builderSingle.setMessage("Are you ready to take action?");
+        builderSingle.setTitle("Are you ready to take action?");
+        builderSingle.setMessage("We do, we decide");
         builderSingle.setNegativeButton("Not yet",
                 new DialogInterface.OnClickListener() {
 

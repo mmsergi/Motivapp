@@ -2,7 +2,9 @@ package com.sergi.motivapp.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ExpandableListView;
 
@@ -19,13 +21,22 @@ public class GoalsActivity extends AppCompatActivity {
 
     private ExpandableListView listView;
     private ExpandableListGoalsAdapter listAdapter;
-    private List<String> listDataHeader;
-    private HashMap<String,List<String>> listHash;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_goals);
+
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(myToolbar);
+
+        // Get a support ActionBar corresponding to this toolbar
+        ActionBar ab = getSupportActionBar();
+
+        // Enable the Up button
+        ab.setDisplayHomeAsUpEnabled(true);
+
+        ab.setTitle("Goals");
 
         listView = (ExpandableListView)findViewById(R.id.lvExp);
         initData();
@@ -45,11 +56,6 @@ public class GoalsActivity extends AppCompatActivity {
         ArrayList<Goal> aListGoals = db.getGoals();
 
         db.close();
-
-        listDataHeader = new ArrayList<>();
-        listHash = new HashMap<>();
-
-
 
         listAdapter = new ExpandableListGoalsAdapter(this, aListGoals);
         listView.setAdapter(listAdapter);

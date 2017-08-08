@@ -45,7 +45,7 @@ public class NewGoalActivity extends AppCompatActivity {
         list = (ListView) findViewById(R.id.listView);
         etTask = (EditText) findViewById(R.id.editTextTask);
 
-        final Button button = (Button) findViewById(R.id.button);
+        final Button button = (Button) findViewById(R.id.stopNotifications);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 

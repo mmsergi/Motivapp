@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,6 +17,7 @@ import android.widget.Toast;
 
 import com.sergi.motivapp.AlarmReceiver;
 import com.sergi.motivapp.R;
+import com.sergi.motivapp.TimePickerFragment;
 
 import java.util.Calendar;
 
@@ -31,7 +33,7 @@ public class NotificationsFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_notifications, container, false);
         context = getActivity();
 
-        Button button = (Button) v.findViewById(R.id.button);
+        Button button = (Button) v.findViewById(R.id.stopNotifications);
         button.setOnClickListener(new View.OnClickListener(){
 
             @Override
@@ -40,12 +42,21 @@ public class NotificationsFragment extends Fragment {
             }
         });
 
-        Button button2 = (Button) v.findViewById(R.id.button2);
+        Button button2 = (Button) v.findViewById(R.id.startNotifications);
         button2.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View v) {
                 scheduleNotification(0, 0);
+            }
+        });
+
+        Button button3 = (Button) v.findViewById(R.id.setTime);
+        button3.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                showTimePickerDialog();
             }
         });
 
@@ -55,6 +66,11 @@ public class NotificationsFragment extends Fragment {
     public static NotificationsFragment newInstance() {
         NotificationsFragment f = new NotificationsFragment();
         return f;
+    }
+
+    public void showTimePickerDialog() {
+        DialogFragment newFragment = new TimePickerFragment();
+        newFragment.show(getActivity().getSupportFragmentManager(), "timePicker");
     }
 
     public static void disableNotifications(){
@@ -72,14 +88,13 @@ public class NotificationsFragment extends Fragment {
         alarmManager.cancel(pendingIntent);
 
         Toast.makeText(context, "Notifications disabled", Toast.LENGTH_LONG).show();
-
     }
 
     public static void scheduleNotification(int hour, int minute) {
 
         disableNotifications();
 
-        SharedPreferences sharedPref =  context.getSharedPreferences("notis", Context.MODE_PRIVATE);
+        SharedPreferences sharedPref = context.getSharedPreferences("notis", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putString("hour", Integer.toString(hour));
         editor.putString("minute", Integer.toString(minute));
