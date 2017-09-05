@@ -21,8 +21,8 @@
 
     </android.support.v7.widget.Toolbar>
 
-    <ExpandableListView
-        android:id="@+id/lvExp"
+    <ListView
+        android:id="@+id/lv"
         android:layout_below="@id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>

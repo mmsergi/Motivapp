@@ -7,25 +7,28 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ExpandableListView;
+import android.widget.ListView;
 
 import com.sergi.motivapp.DatabaseGoals;
 import com.sergi.motivapp.R;
-import com.sergi.motivapp.adapters.ExpandableListGoalsAdapter;
+import com.sergi.motivapp.adapters.GoalsListAdapter;
 import com.sergi.motivapp.models.Goal;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
-public class GoalsActivity extends AppCompatActivity {
+/**
+ * Created by Sergi on 22/08/2017.
+ */
 
-    private ExpandableListView listView;
-    private ExpandableListGoalsAdapter listAdapter;
+public class Goals2Activity extends AppCompatActivity {
+
+    private ListView listView;
+    private GoalsListAdapter listAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list_goals);
+        setContentView(R.layout.activity_list_goals2);
 
         Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
@@ -38,7 +41,7 @@ public class GoalsActivity extends AppCompatActivity {
 
         ab.setTitle("My Goals");
 
-        listView = (ExpandableListView)findViewById(R.id.lvExp);
+        listView = (ListView) findViewById(R.id.lv);
         initData();
     }
 
@@ -57,7 +60,7 @@ public class GoalsActivity extends AppCompatActivity {
 
         db.close();
 
-        listAdapter = new ExpandableListGoalsAdapter(this, aListGoals);
+        listAdapter = new GoalsListAdapter(this, aListGoals);
         listView.setAdapter(listAdapter);
     }
 

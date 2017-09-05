@@ -1,23 +1,18 @@
 package com.sergi.motivapp.fragments;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 
 import com.sergi.motivapp.R;
-import com.sergi.motivapp.adapters.ImagesListAdapter;
 import com.sergi.motivapp.adapters.QuotesListAdapter;
-import com.sergi.motivapp.models.ImageToken;
 import com.sergi.motivapp.models.QuoteToken;
 
 import org.json.JSONArray;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by gersoft on 22/06/2017.
@@ -30,7 +25,7 @@ public class QuotesFragment extends ListFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.list_view_layout, container, false);
+        View v = inflater.inflate(R.layout.list_view, container, false);
 
         return v;
     }

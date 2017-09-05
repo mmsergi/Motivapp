@@ -9,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -43,6 +44,9 @@ public class MainActivity extends AppCompatActivity {
 
         Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
+
+        ActionBar ab = getSupportActionBar();
+        ab.setTitle("MOTIVAPP");
 
         final List<String> permissionsList = new ArrayList<>();
         permissionsList.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
@@ -138,7 +142,7 @@ public class MainActivity extends AppCompatActivity {
     public void onClick(View v){
         switch (v.getId()){
             case R.id.goalsBtn:
-                Intent i = new Intent(this, GoalsActivity.class);
+                Intent i = new Intent(this, Goals2Activity.class);
                 startActivity(i);
                 break;
         }

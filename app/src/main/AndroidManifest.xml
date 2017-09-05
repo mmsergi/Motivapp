@@ -35,16 +35,18 @@
             android:name=".activities.GoalsActivity"
             android:screenOrientation="portrait"
             android:parentActivityName=".activities.MainActivity" >
+        </activity>
 
-            <!-- Parent activity meta-data to support 4.0 and lower -->
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activities.MainActivity" />
+        <activity
+            android:name=".activities.Goals2Activity"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".activities.MainActivity" >
         </activity>
 
         <activity
             android:name=".activities.NewGoalActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:parentActivityName=".activities.GoalsActivity"/>
 
         <activity
             android:name=".activities.VideoActivity"/>
