@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -64,7 +65,7 @@ public class GoalsListAdapter extends BaseAdapter {
         goal.setText(g.goal);
         why.setText(g.why);
 
-        ListView lv = (ListView) v.findViewById(R.id.lv);
+        ListView lv = (ListView) v.findViewById(R.id.listViewTasks);
 
         ArrayList<String> listItems = new ArrayList<>();
 
@@ -85,6 +86,28 @@ public class GoalsListAdapter extends BaseAdapter {
             e.printStackTrace();
         }
 
+        setListViewHeightBasedOnChildren(lv);
+
         return v;
+    }
+
+    public static void setListViewHeightBasedOnChildren(ListView listView) {
+        ListAdapter listAdapter = listView.getAdapter();
+        if (listAdapter == null) {
+            // pre-condition
+            return;
+        }
+
+        int totalHeight = 0;
+        for (int i = 0; i < listAdapter.getCount(); i++) {
+            View listItem = listAdapter.getView(i, null, listView);
+            listItem.measure(0, 0);
+            totalHeight += listItem.getMeasuredHeight();
+        }
+
+        ViewGroup.LayoutParams params = listView.getLayoutParams();
+        params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
+        listView.setLayoutParams(params);
+        listView.requestLayout();
     }
 }

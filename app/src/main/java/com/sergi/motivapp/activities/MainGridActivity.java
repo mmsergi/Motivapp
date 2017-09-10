@@ -50,7 +50,7 @@ public class MainGridActivity extends AppCompatActivity{
 
                 switch (iconsNames.get(position).toLowerCase()) {
                     case "moti":
-                        startActivity(new Intent(MainGridActivity.this, GoalsActivity.class));
+                        startActivity(new Intent(MainGridActivity.this, Goals2Activity.class));
                         break;
                 }
             }
