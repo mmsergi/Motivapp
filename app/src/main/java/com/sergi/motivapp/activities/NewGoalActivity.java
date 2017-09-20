@@ -97,7 +97,7 @@ public class NewGoalActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent i = new Intent(this, GoalsActivity.class);
+        Intent i = new Intent(this, Goals2Activity.class);
         startActivity(i);
         finish();
     }

@@ -67,8 +67,9 @@ public class Goals2Activity extends AppCompatActivity {
     public void onClick(View v){
         switch (v.getId()){
             case R.id.newGoalBtn:
-                Intent i2 = new Intent(this, NewGoalActivity.class);
-                startActivity(i2);
+                Intent i = new Intent(this, NewGoalActivity.class);
+                startActivity(i);
+                finish();
                 break;
         }
     }

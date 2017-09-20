@@ -57,4 +57,13 @@ public class MainGridActivity extends AppCompatActivity{
         });
 
     }
+
+    public void onClick(View v){
+        switch (v.getId()){
+            case R.id.goalsBtn:
+                Intent i = new Intent(this, Goals2Activity.class);
+                startActivity(i);
+                break;
+        }
+    }
 }
