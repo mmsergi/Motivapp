@@ -47,12 +47,8 @@ public class NewGoalActivity extends AppCompatActivity {
         Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
 
-        // Get a support ActionBar corresponding to this toolbar
         ActionBar ab = getSupportActionBar();
-
-        // Enable the Up button
         ab.setDisplayHomeAsUpEnabled(true);
-
         ab.setTitle("New goal");
 
         list = (ListView) findViewById(R.id.listView);

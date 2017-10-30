@@ -40,7 +40,7 @@ public class ImagesFragment extends ListFragment implements AdapterView.OnItemCl
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.list_view, container, false);
 
-        new downloadImagesData().execute("http://appsergi.esy.es/getimages.php");
+        if (listData.isEmpty()) new downloadImagesData().execute("http://appsergi.esy.es/getimages.php");
 
         return v;
     }

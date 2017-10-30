@@ -16,7 +16,7 @@ public class DatabaseGoals extends SQLiteOpenHelper {
 
     private static final int version = 1;
 
-    private static final String tableGoals = "create table goals (goal text, why text, tasks text)";
+    private static final String tableGoals = "create table goals (goal text, why text, tasks text, created_at DATETIME DEFAULT CURRENT_TIMESTAMP)";
 
     public DatabaseGoals(Context context) {
         super(context, name, null, version);

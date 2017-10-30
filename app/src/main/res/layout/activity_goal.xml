@@ -12,7 +12,6 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:background="?attr/colorPrimary"
@@ -24,9 +23,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_above="@+id/tab_layout"
-            android:layout_alignParentRight="true"
-            android:layout_gravity="right"
-            android:layout_marginRight="10dp"
+            android:layout_alignParentEnd="true"
+            android:layout_gravity="end"
+            android:layout_marginEnd="10dp"
             android:backgroundTint="@color/colorPrimaryDark"
             android:onClick="onClick"
             android:text="add it"
@@ -35,14 +34,12 @@
 
     </android.support.v7.widget.Toolbar>
 
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="10dp"
     android:layout_below="@+id/toolbar"
-    android:layout_alignParentLeft="true"
     android:layout_alignParentStart="true">
 
     <LinearLayout
@@ -57,11 +54,16 @@
             android:textSize="24sp"
             android:textStyle="bold" />
 
-        <EditText
-            android:id="@+id/editTextGoal"
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Example: Conquer the world" />
+            android:layout_height="match_parent">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/editTextGoal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Example: Conquer the world" />
+        </android.support.design.widget.TextInputLayout>
 
         <TextView
             android:layout_width="wrap_content"

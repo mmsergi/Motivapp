@@ -39,7 +39,7 @@ public class VideosFragment extends ListFragment {
     @Override
     public void onViewCreated (View view, Bundle savedInstanceState) {
 
-        new downloadVideosData().execute("http://appsergi.esy.es/getvideos.php");
+        if (listData.isEmpty()) new downloadVideosData().execute("http://appsergi.esy.es/getvideos.php");
 
     }
 

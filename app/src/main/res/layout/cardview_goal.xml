@@ -19,9 +19,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
-            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:text="Conquer the world"
+            android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -41,7 +41,6 @@
             android:id="@+id/date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginTop="8dp"
             android:text="22/08/2017"
@@ -53,14 +52,27 @@
             android:layout_width="wrap_content"
             android:layout_height="17dp"
             android:layout_marginLeft="8dp"
-            android:layout_marginStart="8dp"
             android:layout_marginTop="6dp"
             android:text="Tasks:"
+            android:textSize="14sp"
             android:textStyle="bold"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/why" />
 
-        <ListView
+        <TextView
+            android:id="@+id/tasksText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:lineSpacingExtra="8sp"
+            android:text="TextView\nPEPE"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tasks" />
+
+        <!--<ListView
             android:id="@+id/listViewTasks"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -69,7 +81,7 @@
             android:headerDividersEnabled="false"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tasks" />
+            app:layout_constraintTop_toBottomOf="@+id/tasks" />-->
 
     </android.support.constraint.ConstraintLayout>
 </android.support.v7.widget.CardView>

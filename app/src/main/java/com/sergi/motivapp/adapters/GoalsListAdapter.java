@@ -65,7 +65,25 @@ public class GoalsListAdapter extends BaseAdapter {
         goal.setText(g.goal);
         why.setText(g.why);
 
-        ListView lv = (ListView) v.findViewById(R.id.listViewTasks);
+        TextView tasks = (TextView) v.findViewById(R.id.tasksText);
+
+        try {
+            JSONArray jsonArray = new JSONArray(g.tasks);
+
+            for (int e = 0; e < jsonArray.length(); e++) {
+                if (e!=0) {
+                    tasks.setText(tasks.getText() + "\n" + jsonArray.get(e));
+                } else {
+                    tasks.setText((String) jsonArray.get(e));
+                }
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        // Lista tasks
+        /*ListView lv = (ListView) v.findViewById(R.id.listViewTasks);
 
         ArrayList<String> listItems = new ArrayList<>();
 
@@ -86,7 +104,7 @@ public class GoalsListAdapter extends BaseAdapter {
             e.printStackTrace();
         }
 
-        setListViewHeightBasedOnChildren(lv);
+        setListViewHeightBasedOnChildren(lv);*/
 
         return v;
     }

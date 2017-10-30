@@ -30,7 +30,8 @@
 
         <activity
             android:name=".activities.MainActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:launchMode="singleTop" />
 
         <activity
             android:name=".activities.MainGridActivity"
@@ -54,7 +55,8 @@
             android:parentActivityName=".activities.GoalsActivity"/>
 
         <activity
-            android:name=".activities.VideoActivity"/>
+            android:name=".activities.VideoActivity"
+            android:parentActivityName=".activities.MainActivity"/>
 
         <receiver android:name=".AlarmReceiver" />
 
