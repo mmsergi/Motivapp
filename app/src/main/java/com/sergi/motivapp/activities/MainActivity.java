@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -51,7 +52,9 @@ public class MainActivity extends AppCompatActivity {
         final List<String> permissionsList = new ArrayList<>();
         permissionsList.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
 
-        requestPermissions(permissionsList.toArray(new String[permissionsList.size()]), REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            requestPermissions(permissionsList.toArray(new String[permissionsList.size()]), REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS);
+        }
 
         viewPager.setAdapter(new FragmentAdapter(getSupportFragmentManager()));
         viewPager.setOffscreenPageLimit(3);
