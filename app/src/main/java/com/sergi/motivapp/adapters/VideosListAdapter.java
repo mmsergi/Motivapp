@@ -20,8 +20,6 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.sergi.motivapp.R;
 import com.sergi.motivapp.activities.VideoActivity;
-import com.sergi.motivapp.models.ImageToken;
-import com.sergi.motivapp.models.QuoteToken;
 import com.sergi.motivapp.models.VideoToken;
 
 import java.util.ArrayList;
@@ -61,7 +59,7 @@ public class VideosListAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View v, ViewGroup parent) {
 
-        v = layoutInflater.inflate(R.layout.token_video, null);
+        v = layoutInflater.inflate(R.layout.item_video, null);
 
         TextView title = (TextView) v.findViewById(R.id.textViewTitle);
         final ImageView image = (ImageView) v.findViewById(R.id.imageView);

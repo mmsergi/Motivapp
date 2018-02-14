@@ -38,7 +38,7 @@ public class ImagesFragment extends ListFragment implements AdapterView.OnItemCl
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.list_view, container, false);
+        View v = inflater.inflate(R.layout.fragment_list_view, container, false);
 
         if (listData.isEmpty()) new downloadImagesData().execute("http://appsergi.esy.es/getimages.php");
 

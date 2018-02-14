@@ -63,6 +63,11 @@ public class MainActivity extends AppCompatActivity {
         tabs.setTabMode(TabLayout.MODE_SCROLLABLE);
 
         tabs.setupWithViewPager(viewPager);
+
+        tabs.getTabAt(0).setIcon(R.drawable.ic_photo_white_24dp);
+        tabs.getTabAt(1).setIcon(R.drawable.ic_format_quote_white_24dp);
+        tabs.getTabAt(2).setIcon(R.drawable.ic_ondemand_video_white_24dp);
+        tabs.getTabAt(3).setIcon(R.drawable.ic_notifications_white_24dp);
     }
 
     @Override

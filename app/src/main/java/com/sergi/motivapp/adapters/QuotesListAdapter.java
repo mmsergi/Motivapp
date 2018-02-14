@@ -9,7 +9,6 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.sergi.motivapp.R;
-import com.sergi.motivapp.models.ImageToken;
 import com.sergi.motivapp.models.QuoteToken;
 
 import java.util.ArrayList;
@@ -48,7 +47,7 @@ public class QuotesListAdapter extends BaseAdapter{
 
     @Override
     public View getView(int position, View v, ViewGroup parent) {
-        v = layoutInflater.inflate(R.layout.token_quote, null);
+        v = layoutInflater.inflate(R.layout.item_quote, null);
 
         TextView text = (TextView) v.findViewById(R.id.quoteTextView);
         TextView author = (TextView) v.findViewById(R.id.authorTextView);

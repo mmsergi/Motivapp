@@ -25,7 +25,7 @@ public class QuotesFragment extends ListFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.list_view, container, false);
+        View v = inflater.inflate(R.layout.fragment_list_view, container, false);
 
         return v;
     }
