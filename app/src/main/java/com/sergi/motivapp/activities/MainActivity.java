@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar myToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
 
         ActionBar ab = getSupportActionBar();
@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
         viewPager.setAdapter(new FragmentAdapter(getSupportFragmentManager()));
         viewPager.setOffscreenPageLimit(3);
 
-        TabLayout tabs = (TabLayout) findViewById(R.id.tab_layout);
+        TabLayout tabs = findViewById(R.id.tab_layout);
         tabs.setTabMode(TabLayout.MODE_SCROLLABLE);
 
         tabs.setupWithViewPager(viewPager);
