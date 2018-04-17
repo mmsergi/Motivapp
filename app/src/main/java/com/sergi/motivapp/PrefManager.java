@@ -4,22 +4,23 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 public class PrefManager {
-    SharedPreferences pref;
-    SharedPreferences.Editor editor;
-    Context context;
+    private SharedPreferences pref;
+    private SharedPreferences.Editor editor;
 
     // shared pref mode
-    int PRIVATE_MODE = 0;
+    private static final int PRIVATE_MODE = 0;
 
     // Shared preferences file name
     private static final String PREF_NAME = "moti-preferences";
 
     private static final String IS_FIRST_TIME_LAUNCH = "IsFirstTimeLaunch";
+    private static final String HOUR_ALARM = "HourAlarm";
+    private static final String MINUTE_ALARM = "MinuteAlarm";
 
     public PrefManager(Context context) {
-        this.context = context;
-        pref = this.context.getSharedPreferences(PREF_NAME, PRIVATE_MODE);
+        pref = context.getSharedPreferences(PREF_NAME, PRIVATE_MODE);
         editor = pref.edit();
+        editor.apply();
     }
 
     public void setFirstTimeLaunch(boolean isFirstTime) {
@@ -31,8 +32,16 @@ public class PrefManager {
         return pref.getBoolean(IS_FIRST_TIME_LAUNCH, true);
     }
 
-    public void setNotificationInterval(){
+    public void setNotificationAlarm(int hour, int minute) {
+        editor.putInt(HOUR_ALARM, hour);
+        editor.putInt(MINUTE_ALARM, minute);
+        editor.commit();
+    }
 
+    public String getStringNotificationTime(){
+        String hour = String.valueOf(pref.getInt(HOUR_ALARM, 0));
+        String minute = String.valueOf(pref.getInt(MINUTE_ALARM, 0));
+        return hour + ":" + minute;
     }
 
 }

@@ -106,7 +106,7 @@ public class VideosFragment extends ListFragment implements AdapterView.OnItemCl
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                getListView().setAdapter(new ImagesListAdapter(getContext(), listData));
+                getListView().setAdapter(new VideosListAdapter(getContext(), listData));
             }
         });
     }
