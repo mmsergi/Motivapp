@@ -67,6 +67,11 @@ public class PrefManager {
         if (minute.equals("0")) minute = "00";
         if (minute.length() < 2) minute = "0" + minute;
 
+        if (hour.equals("99")){
+            hour = "--";
+            minute = "--";
+        }
+
         return hour + ":" + minute;
     }
 }

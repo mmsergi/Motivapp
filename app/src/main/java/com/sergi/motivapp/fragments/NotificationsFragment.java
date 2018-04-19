@@ -27,6 +27,7 @@ import java.util.Calendar;
 public class NotificationsFragment extends Fragment {
 
     static TextView textViewTime;
+    static Switch switchNotifications;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -37,7 +38,7 @@ public class NotificationsFragment extends Fragment {
         textViewTime = v.findViewById(R.id.textViewTime);
         textViewTime.setText(prefManager.getStringNotificationTime());
 
-        Switch switchNotifications = v.findViewById(R.id.switchNotifications);
+        switchNotifications = v.findViewById(R.id.switchNotifications);
         switchNotifications.setChecked(prefManager.isNotificationsEnabled());
 
         switchNotifications.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -45,7 +46,7 @@ public class NotificationsFragment extends Fragment {
 
                 if (isChecked) {
                     prefManager.setNotifications(true);
-                    NotificationManager.schedule(getContext(), 0, 0);
+                    NotificationManager.schedule(getContext(), prefManager.getHourNotificationAlarm(), prefManager.getMinuteNotificationAlarm());
                 } else {
                     prefManager.setNotifications(false);
                     NotificationManager.disable(getContext());
@@ -88,12 +89,8 @@ public class NotificationsFragment extends Fragment {
         }
 
         public void onTimeSet(TimePicker view, int hour, int minute) {
-            // Do something with the time chosen by the user
-            Log.e("hour selected", Integer.toString(hour));
-            Log.e("minute selected", Integer.toString(minute));
 
             PrefManager prefManager = new PrefManager(getContext());
-
             prefManager.setNotificationAlarm(hour, minute);
 
             textViewTime.setText(prefManager.getStringNotificationTime());
