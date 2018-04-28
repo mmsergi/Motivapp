@@ -7,8 +7,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+
 import com.sergi.motivapp.R;
+import com.sergi.motivapp.adapters.ImagesListAdapter;
 import com.sergi.motivapp.adapters.VideosListAdapter;
+import com.sergi.motivapp.models.ImageToken;
 import com.sergi.motivapp.models.VideoToken;
 
 import org.json.JSONArray;
@@ -24,113 +28,86 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
-public class VideosFragment extends ListFragment {
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+
+public class VideosFragment extends ListFragment implements AdapterView.OnItemClickListener{
 
     JSONArray jsonVideos;
     ArrayList<VideoToken> listData = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_list_view, container, false);
 
-        return v;
-    }
-
-    @Override
-    public void onViewCreated (View view, Bundle savedInstanceState) {
-
-        if (listData.isEmpty()) new downloadVideosData().execute("http://appsergi.esy.es/getvideos.php");
-
+        return inflater.inflate(R.layout.fragment_list_view, container, false);
     }
 
     public static VideosFragment newInstance() {
-        VideosFragment f = new VideosFragment();
-        return f;
+        return new VideosFragment();
     }
 
-    private class downloadVideosData extends AsyncTask<String, String, String> {
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
 
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
+        getVideosData();
 
-        protected String doInBackground(String... params) {
+        getListView().setOnItemClickListener(this);
+    }
 
-            HttpURLConnection connection = null;
-            BufferedReader reader = null;
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-            try {
-                URL url = new URL(params[0]);
-                connection = (HttpURLConnection) url.openConnection();
-                connection.connect();
+    }
 
-                InputStream stream = connection.getInputStream();
+    void getVideosData (){
 
-                reader = new BufferedReader(new InputStreamReader(stream));
+        OkHttpClient client = new OkHttpClient();
+        Request request;
 
-                StringBuffer buffer = new StringBuffer();
-                String line = "";
+        request = new Request.Builder().url("http://appsergi.esy.es/getvideos.php").get().build();
 
-                while ((line = reader.readLine()) != null) {
-                    buffer.append(line+"\n");
-
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) { e.printStackTrace(); }
+            @Override
+            public void onResponse(Call call, final Response response) throws IOException {
+                if (!response.isSuccessful()) {
+                    throw new IOException("Unexpected code " + response);
+                } else {
+                    String line = response.body().string();
                     try {
-                        jsonVideos =  new JSONArray(line);
+                        jsonVideos  =  new JSONArray(line);
+
+                        for (int i = 0; i < jsonVideos.length(); i++) {
+                            JSONObject jsonObject = jsonVideos.getJSONObject(i);
+
+                            String title = jsonObject.getString("title");
+                            String url = jsonObject.getString("url");
+                            int points = jsonObject.getInt("points");
+
+                            listData.add(new VideoToken(title, url, points));
+                        }
+
+                        updateUI();
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-
-                    Log.d("Response", line);   //here u ll get whole response...... :-)
-
-                }
-
-                return buffer.toString();
-
-
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } finally {
-                if (connection != null) {
-                    connection.disconnect();
-                }
-                try {
-                    if (reader != null) {
-                        reader.close();
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
                 }
             }
-            return null;
-        }
+        });
 
-        @Override
-        protected void onPostExecute(String result) {
-            super.onPostExecute(result);
-
-            int lengthArray = jsonVideos.length();
-
-            for (int i = 0; i < lengthArray; i++) {
-                JSONObject jsonObject;
-                try {
-
-                    jsonObject = jsonVideos.getJSONObject(i);
-
-                    String title = jsonObject.getString("title");
-                    String url = jsonObject.getString("url");
-                    int points = jsonObject.getInt("points");
-
-                    listData.add(new VideoToken(title, url, points));
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            getListView().setAdapter(new VideosListAdapter(getContext(), listData));
-        }
     }
 
+    void updateUI() {
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                getListView().setAdapter(new VideosListAdapter(getContext(), listData));
+            }
+        });
+    }
 }

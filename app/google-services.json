@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "703988045948",
+    "firebase_url": "https://motivapp-148412.firebaseio.com",
+    "project_id": "motivapp-148412",
+    "storage_bucket": "motivapp-148412.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:703988045948:android:a9016b33703f8943",
+        "android_client_info": {
+          "package_name": "com.sergi.motivapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "703988045948-qjggcaobaesh4ra8eioerqhad529j3vl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sergi.motivapp",
+            "certificate_hash": "6a7d151d7e5c5af101f79a6faa2ee3b80457e2d4"
+          }
+        },
+        {
+          "client_id": "703988045948-aes3ttfsfbcd8h9lb5l7a38kklivjvga.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBVFPCnuipqwNFQtbUta_xkhtppCw0_ri8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "703988045948-aes3ttfsfbcd8h9lb5l7a38kklivjvga.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

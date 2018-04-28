@@ -44,11 +44,8 @@ public class ImagesFragment extends ListFragment implements AdapterView.OnItemCl
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_list_view, container, false);
 
-        //if (listData.isEmpty()) new downloadImagesData().execute("http://appsergi.esy.es/getimages.php");
-        //if (listData.isEmpty()) getImagesData();
-        return v;
+        return inflater.inflate(R.layout.fragment_list_view, container, false);
     }
 
     public static ImagesFragment newInstance() {
@@ -66,91 +63,6 @@ public class ImagesFragment extends ListFragment implements AdapterView.OnItemCl
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
         Toast.makeText(getActivity(), "Item: " + position, Toast.LENGTH_SHORT).show();
-    }
-    
-    private class downloadImagesData extends AsyncTask<String, String, String> {
-
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
-
-        protected String doInBackground(String... params) {
-
-            HttpURLConnection connection = null;
-            BufferedReader reader = null;
-
-            try {
-                URL url = new URL(params[0]);
-                connection = (HttpURLConnection) url.openConnection();
-                connection.connect();
-
-                InputStream stream = connection.getInputStream();
-
-                reader = new BufferedReader(new InputStreamReader(stream));
-
-                StringBuffer buffer = new StringBuffer();
-                String line = "";
-
-                while ((line = reader.readLine()) != null) {
-                    buffer.append(line+"\n");
-
-                    try {
-                        jsonImages  =  new JSONArray(line);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-
-                    Log.d("Response", line);   //here u ll get whole response...... :-)
-
-                }
-
-                return buffer.toString();
-
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } finally {
-                if (connection != null) {
-                    connection.disconnect();
-                }
-                try {
-                    if (reader != null) {
-                        reader.close();
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(String result) {
-            super.onPostExecute(result);
-
-            int lengthArray = 0;
-            if (jsonImages!=null) jsonImages.length();
-
-            for (int i = 0; i < lengthArray; i++) {
-                JSONObject jsonObject;
-                try {
-
-                    jsonObject = jsonImages.getJSONObject(i);
-
-                    String title = jsonObject.getString("title");
-                    String url = jsonObject.getString("url");
-                    int points = jsonObject.getInt("points");
-
-                    listData.add(new ImageToken(title, url, points));
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            getListView().setAdapter(new ImagesListAdapter(getContext(), listData));
-        }
     }
 
     void getImagesData (){

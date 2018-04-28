@@ -10,10 +10,7 @@ import org.json.JSONArray;
 
 public class AppController extends Application {
 
-    String test = "sergi";
-
     public static final String YOUTUBE_API_KEY = "AIzaSyBzx82FzA9JPRLFRi73v8m3QADAKGW_C2E";
-
 
     @Override
     public void onCreate() {
