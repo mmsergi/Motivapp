@@ -15,12 +15,24 @@
       },
       "oauth_client": [
         {
+          "client_id": "703988045948-k0mtkvutg7q16hgsg4fi4ish0auqubk8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sergi.motivapp",
+            "certificate_hash": "107ee13208dc64bf43223f02ecf9a10d6fdbfe0f"
+          }
+        },
+        {
           "client_id": "703988045948-qjggcaobaesh4ra8eioerqhad529j3vl.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.sergi.motivapp",
             "certificate_hash": "6a7d151d7e5c5af101f79a6faa2ee3b80457e2d4"
           }
+        },
+        {
+          "client_id": "703988045948-aes3ttfsfbcd8h9lb5l7a38kklivjvga.apps.googleusercontent.com",
+          "client_type": 3
         },
         {
           "client_id": "703988045948-aes3ttfsfbcd8h9lb5l7a38kklivjvga.apps.googleusercontent.com",

@@ -1,31 +1,23 @@
 package com.sergi.motivapp.fragments;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.sergi.motivapp.R;
 import com.sergi.motivapp.adapters.ImagesListAdapter;
 import com.sergi.motivapp.models.ImageToken;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.List;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -39,7 +31,6 @@ import okhttp3.Response;
 
 public class ImagesFragment extends ListFragment implements AdapterView.OnItemClickListener {
 
-    JSONArray jsonImages;
     ArrayList<ImageToken> listData = new ArrayList<>();
 
     @Override
@@ -81,23 +72,12 @@ public class ImagesFragment extends ListFragment implements AdapterView.OnItemCl
                     throw new IOException("Unexpected code " + response);
                 } else {
                     String line = response.body().string();
-                    try {
-                        jsonImages  =  new JSONArray(line);
 
-                        for (int i = 0; i < jsonImages.length(); i++) {
-                            JSONObject jsonObject = jsonImages.getJSONObject(i);
+                    Gson gson = new Gson();
+                    Type listOfImageTokens = new TypeToken<List<ImageToken>>(){}.getType();
+                    listData = gson.fromJson(line, listOfImageTokens);
+                    updateUI();
 
-                            String title = jsonObject.getString("title");
-                            String url = jsonObject.getString("url");
-                            int points = jsonObject.getInt("points");
-
-                            listData.add(new ImageToken(title, url, points));
-                        }
-
-                        updateUI();
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
                 }
             }
         });
