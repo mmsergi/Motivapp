@@ -62,12 +62,12 @@ public class ImagesListAdapter extends BaseAdapter {
 
         v = layoutInflater.inflate(R.layout.item_image, null);
 
-        TextView title = (TextView) v.findViewById(R.id.textViewTitle);
-        TextView points = (TextView) v.findViewById(R.id.textViewPoints);
-        final ImageView image = (ImageView) v.findViewById(R.id.imageView);
-        Button shareBtn = (Button) v.findViewById(R.id.shareBtn);
+        TextView title = v.findViewById(R.id.textViewTitle);
+        TextView points = v.findViewById(R.id.textViewPoints);
+        final ImageView image = v.findViewById(R.id.imageView);
+        Button shareBtn = v.findViewById(R.id.shareBtn);
 
-        final ProgressBar progressBar = (ProgressBar) v.findViewById(R.id.progress);
+        final ProgressBar progressBar = v.findViewById(R.id.progress);
 
         ImageToken token = (ImageToken) listData.get(position);
         title.setText(token.title);

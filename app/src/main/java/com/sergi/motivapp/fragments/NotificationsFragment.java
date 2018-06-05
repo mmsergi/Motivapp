@@ -22,24 +22,33 @@ import com.sergi.motivapp.PrefManager;
 import com.sergi.motivapp.R;
 
 import java.util.Calendar;
+import java.util.Objects;
 
 
 public class NotificationsFragment extends Fragment {
 
     static TextView textViewTime;
-    static Switch switchNotifications;
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_notifications, container, false);
 
-        final PrefManager prefManager = new PrefManager(getContext());
+        final PrefManager prefManager = new PrefManager(Objects.requireNonNull(getContext()));
 
         textViewTime = v.findViewById(R.id.textViewTime);
+        final Switch switchNotifications = v.findViewById(R.id.switchNotifications);
+        final Button setBtn = v.findViewById(R.id.setTime);
+
         textViewTime.setText(prefManager.getStringNotificationTime());
 
-        switchNotifications = v.findViewById(R.id.switchNotifications);
-        switchNotifications.setChecked(prefManager.isNotificationsEnabled());
+        if (prefManager.isNotificationsEnabled()){
+            switchNotifications.setChecked(true);
+            textViewTime.setVisibility(View.VISIBLE);
+            setBtn.setVisibility(View.VISIBLE);
+        } else {
+            switchNotifications.setChecked(false);
+            textViewTime.setVisibility(View.GONE);
+            setBtn.setVisibility(View.GONE);
+        }
 
         switchNotifications.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -47,14 +56,17 @@ public class NotificationsFragment extends Fragment {
                 if (isChecked) {
                     prefManager.setNotifications(true);
                     NotificationManager.schedule(getContext(), prefManager.getHourNotificationAlarm(), prefManager.getMinuteNotificationAlarm());
+                    textViewTime.setVisibility(View.VISIBLE);
+                    setBtn.setVisibility(View.VISIBLE);
                 } else {
                     prefManager.setNotifications(false);
                     NotificationManager.disable(getContext());
+                    textViewTime.setVisibility(View.GONE);
+                    setBtn.setVisibility(View.GONE);
                 }
             }
         });
 
-        Button setBtn = v.findViewById(R.id.setTime);
         setBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -71,7 +83,7 @@ public class NotificationsFragment extends Fragment {
 
     public void showTimePickerDialog() {
         DialogFragment newFragment = new TimePickerFragment();
-        newFragment.show(getActivity().getSupportFragmentManager(), "timePicker");
+        newFragment.show(Objects.requireNonNull(getActivity()).getSupportFragmentManager(), "timePicker");
     }
 
 
@@ -90,7 +102,7 @@ public class NotificationsFragment extends Fragment {
 
         public void onTimeSet(TimePicker view, int hour, int minute) {
 
-            PrefManager prefManager = new PrefManager(getContext());
+            PrefManager prefManager = new PrefManager(Objects.requireNonNull(getContext()));
             prefManager.setNotificationAlarm(hour, minute);
 
             textViewTime.setText(prefManager.getStringNotificationTime());

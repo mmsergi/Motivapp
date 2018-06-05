@@ -20,7 +20,6 @@ import java.util.List;
 public class GoalsActivity extends AppCompatActivity {
 
     private ExpandableListView listView;
-    private ExpandableListGoalsAdapter listAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,11 +33,12 @@ public class GoalsActivity extends AppCompatActivity {
         ActionBar ab = getSupportActionBar();
 
         // Enable the Up button
-        ab.setDisplayHomeAsUpEnabled(true);
+        if (ab != null) {
+            ab.setDisplayHomeAsUpEnabled(true);
+            ab.setTitle("My Goals");
+        }
 
-        ab.setTitle("My Goals");
-
-        listView = (ExpandableListView)findViewById(R.id.lvExp);
+        listView = (ExpandableListView) findViewById(R.id.lvExp);
         initData();
     }
 
@@ -50,13 +50,13 @@ public class GoalsActivity extends AppCompatActivity {
     }
 
     public void initData() {
-
         DatabaseGoals db = new DatabaseGoals(getApplicationContext());
 
         ArrayList<Goal> aListGoals = db.getGoals();
 
         db.close();
 
+        ExpandableListGoalsAdapter listAdapter;
         listAdapter = new ExpandableListGoalsAdapter(this, aListGoals);
         listView.setAdapter(listAdapter);
     }
